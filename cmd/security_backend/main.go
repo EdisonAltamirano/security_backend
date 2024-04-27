@@ -45,6 +45,7 @@ func main() {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			logger.Debugw("streamCtx")
 			logger.Debugw("streamCtx", "url", r.URL)
+			logger.Debugw("streamCtxR", "url", r)
 			streamIdString := chi.URLParam(r, "streamID")
 
 			cameraId, err := strconv.ParseInt(streamIdString, 10, 32)
