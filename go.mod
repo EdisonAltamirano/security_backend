@@ -1,6 +1,6 @@
 module EdisonAltamirano/security_backend
 
-go 1.22.2
+go 1.23
 
 require (
 	github.com/EdisonAltamirano/security_backend v0.0.0-20240427153225-0bec99674de9

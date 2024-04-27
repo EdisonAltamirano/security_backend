@@ -36,7 +36,9 @@ RUN go mod download
 COPY . .
 
 # Builds your app with optional configuration
-RUN go build -buildvcs=false -o ./security_backend github.com/EdisonAltamirano/security_backend 
+RUN go build -buildvcs=false -o ./security_backend EdisonAltamirano/security_backend/cmd/security_backend 
+# RUN go build -buildvcs=false -o ./camera_streamer github.com/SmartFactory-Tec/camera_streamer/cmd/camera_streamer
+
 #RUN go build -buildvcs=false -o ./security_backend .
 
 ENV CAMERA_SERVER_CONFIG=/config
