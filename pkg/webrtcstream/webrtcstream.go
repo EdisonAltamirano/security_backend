@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/SmartFactory-Tec/camera_streamer/pkg/gst"
+	"github.com/EdisonAltamirano/security_backend/pkg/gst"
 	"github.com/hashicorp/go-multierror"
 	"github.com/pion/webrtc/v3"
 	"go.uber.org/zap"

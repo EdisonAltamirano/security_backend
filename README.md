@@ -27,7 +27,7 @@ go mod download
 Next, to run the program run the following command:
 
 ```shell
-go run camera_streamer/cmd/camera_streamer
+go run camera_streamer/cmd/camera_streamer 
 ```
 
 If you otherwise want to only build the server and get it's executable, use the following command (don't forget to give 
