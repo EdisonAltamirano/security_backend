@@ -35,13 +35,13 @@ func loadConfig(logger *zap.SugaredLogger) Config {
 			logger.Fatal(err)
 		}
 	} else if v, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
-		folder := path.Join(v, "camera_streamer")
+		folder := path.Join(v, "security_backend")
 		if err := os.MkdirAll(folder, 0777); err != nil {
 			logger.Fatal(err)
 		}
 		configLoader.AddConfigPath(folder)
 	} else if v, ok := os.LookupEnv("HOME"); ok {
-		folder := path.Join(v, ".config/camera_streamer")
+		folder := path.Join(v, ".config/security_backend")
 		if err := os.MkdirAll(folder, 0777); err != nil {
 			logger.Fatal(err)
 		}

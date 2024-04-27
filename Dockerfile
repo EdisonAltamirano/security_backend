@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y  \
     gstreamer1.0-pulseaudio
 
 # Creates an app directory to hold your app’s source code
-WORKDIR /camera_streamer
+WORKDIR /security_backend
 
 COPY go.mod .
 COPY go.sum .
@@ -36,7 +36,8 @@ RUN go mod download
 COPY . .
 
 # Builds your app with optional configuration
-RUN go build -buildvcs=false -o ./camera_streamer github.com/EdisonAltamirano/security_backend.git
+RUN go build -buildvcs=false -o ./security_backend github.com/EdisonAltamirano/security_backend 
+#RUN go build -buildvcs=false -o ./security_backend .
 
 ENV CAMERA_SERVER_CONFIG=/config
 
@@ -44,4 +45,4 @@ ENV CAMERA_SERVER_CONFIG=/config
 EXPOSE 3000
 
 # Specifies the executable command that runs when the container starts
-ENTRYPOINT [ "/camera_streamer/camera_streamer" ]
+ENTRYPOINT [ "/security_backend/security_backend" ]
