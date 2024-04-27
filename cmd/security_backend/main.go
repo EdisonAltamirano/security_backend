@@ -11,6 +11,8 @@ import (
 	"github.com/go-chi/cors"
 	"net/http"
 	"strconv"
+	"bytes"
+    "io/ioutil"
 )
 
 func main() {
@@ -20,7 +22,7 @@ func main() {
 
 	r.Use(LogRequests(logger))
 
-	logger.Debugw("initializing gstreamer3")
+	logger.Debugw("initializing gstreamer4")
 	gst.Init()
 
 	config := loadConfig(logger)
@@ -45,13 +47,26 @@ func main() {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			logger.Debugw("streamCtx")
 			logger.Debugw("streamCtx", "url", r.URL)
-			logger.Debugw("streamCtxR", "url", r)
+			logger.Debugw("streamCtxR", "url", r.body)
 			streamIdString := chi.URLParam(r, "streamID")
+			
+			// Read the request body
+			body, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				logger.Errorw("Error reading request body", "error", err)
+				http.Error(w, "Internal server error", http.StatusInternalServerError)
+				return
+			}
+
+			// Print the request body as a string
+			logger.Debugw("streamCtxR", "url", r.URL, "body", string(body))
 
 			cameraId, err := strconv.ParseInt(streamIdString, 10, 32)
 
 			if err != nil {
 				logger.Errorw("invalid camera id")
+				logger.Errorw("invalid camera id", "err", err)
+				logger.Errorw("invalid camera id", "cameraId", cameraId)
 				http.Error(w, "invalid camera id", 400)
 				return
 			}
