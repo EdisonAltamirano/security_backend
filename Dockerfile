@@ -1,7 +1,7 @@
 # Specifies a parent image
 FROM golang:1.20.2-bullseye
 
-LABEL org.opencontainers.image.source=https://github.com/Smartfactory-Tec/camera_streamer
+LABEL org.opencontainers.image.source=https://github.com/EdisonAltamirano/security_backend
 
 
 
@@ -36,7 +36,7 @@ RUN go mod download
 COPY . .
 
 # Builds your app with optional configuration
-RUN go build -buildvcs=false -o ./camera_streamer github.com/SmartFactory-Tec/camera_streamer/cmd/camera_streamer
+RUN go build -buildvcs=false -o ./camera_streamer github.com/EdisonAltamirano/security_backend.git
 
 ENV CAMERA_SERVER_CONFIG=/config
 

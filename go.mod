@@ -1,4 +1,4 @@
-module github.com/SmartFactory-Tec/camera_streamer
+module github.com/EdisonAltamirano/security_backend
 
 go 1.19
 
