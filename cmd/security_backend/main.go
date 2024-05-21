@@ -11,7 +11,6 @@ import (
 	"github.com/go-chi/cors"
 	"net/http"
 	"strconv"
-	"bytes"
     "io/ioutil"
 )
 
@@ -29,7 +28,7 @@ func main() {
 
 	var allowedOrigins []string
 
-	if !config.Cors.AllowAllOrigins {
+	if (config.Cors.AllowAllOrigins) {
 		allowedOrigins = config.Cors.AllowedOrigins
 	}
 
@@ -47,7 +46,6 @@ func main() {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			logger.Debugw("streamCtx")
 			logger.Debugw("streamCtx", "url", r.URL)
-			logger.Debugw("streamCtxR", "url", r.body)
 			streamIdString := chi.URLParam(r, "streamID")
 			
 			// Read the request body
@@ -60,7 +58,7 @@ func main() {
 
 			// Print the request body as a string
 			logger.Debugw("streamCtxR", "url", r.URL, "body", string(body))
-
+			logger.Debugw("streamCtx", "streamIdString", streamIdString)
 			cameraId, err := strconv.ParseInt(streamIdString, 10, 32)
 
 			if err != nil {
@@ -116,7 +114,6 @@ func main() {
 		r.Use(streamCtx)
 		r.Get("/", makeGetStreamHandler(logger))
 	})
-
 	logger.Infow("starting web server", "port", config.Port)
 	err := http.ListenAndServe(fmt.Sprintf(":%d", config.Port), r)
 	logger.Infow("server stopped")
