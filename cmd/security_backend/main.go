@@ -41,7 +41,7 @@ func main() {
 
 	streamStore := make(map[int]*webrtcstream.WebRTCStream)
 	cameraServiceUrl := fmt.Sprintf("%s:%d/", config.CameraService.Hostname, config.CameraService.Port)
-
+	logger.Debugw(cameraServiceUrl);
 	streamCtx := func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			logger.Debugw("streamCtx")
