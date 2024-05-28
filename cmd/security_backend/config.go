@@ -58,7 +58,8 @@ func loadConfig(logger *zap.SugaredLogger) Config {
 
 	// db config
 	configLoader.SetDefault("camera_service.hostname", "localhost")
-	configLoader.SetDefault("camera_service.port", 3000)
+	//configLoader.SetDefault("camera_service.port", 3000)
+	configLoader.SetDefault("camera_service.port", 3002)
 
 	err := configLoader.ReadInConfig()
 
