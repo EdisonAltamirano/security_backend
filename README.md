@@ -53,3 +53,8 @@ To configure the server inside the docker image, override the `/config` folder i
 mount). 
 
 By default, the image exposes the 3000 port.
+
+
+
+docker build -t backend:nawi -f Dockerfile .
+docker run --rm -it -p 3002:3000/tcp backend:nawi
