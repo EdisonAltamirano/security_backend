@@ -10,7 +10,7 @@ This repository contains the development of camera streamer backend which is the
    SSH:
 
    ```bash
-   $ git clone --recurse-submodules https://github.com/RoBorregos/Robocup-Home.git
+   $ git clone --recurse-submodules https://github.com/EdisonAltamirano/security_backend.git
    ```
 2.  Build the image just the first time
   ```bash
@@ -35,4 +35,9 @@ This repository contains the development of camera streamer backend which is the
 1. The camera link is generated in https://www.ispyconnect.com/camera/imou
 ```bash
 rtsp://admin:L2FDAF98@192.168.1.73:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif
+```
+2. To test ispy connect, you can use the container and it will automatically scan and detect available cameras.
+
+```bash
+    docker run -d --name=AgentDVR -e PUID=1000 -e PGID=1000 -e TZ=America/New_York -p 8090:8090 -p 3478:3478/udp -p 50000-50010:50000-50010/udp -v /appdata/AgentDVR/config/:/AgentDVR/Media/XML/ -v /appdata/AgentDVR/media/:/AgentDVR/Media/WebServerRoot/Media/ -v /appdata/AgentDVR/commands:/AgentDVR/Commands/ --restart unless-stopped mekayelanik/ispyagentdvr:latest
 ```
