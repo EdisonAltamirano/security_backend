@@ -58,3 +58,6 @@ By default, the image exposes the 3000 port.
 
 docker build -t backend:nawi -f Dockerfile .
 docker run --rm -it -p 3002:3000/tcp backend:nawi
+
+
+rtsp://admin:L2FDAF98@192.168.1.73:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif
