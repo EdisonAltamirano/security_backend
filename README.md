@@ -1,63 +1,38 @@
-# Smart Factory camera server
-***
-This repository contains a camera server written in Go, that aims to convert RTSP video streams from IP cameras to a WebRTC compatible format, allowing the display of the 
-camera streams in a web browser.
+<img src="readme_resources/nawilogo.jpg" width="100" ><img> 
 
-## System Requirements
-The project is mostly written in the Go programming language. It is intended to be compiled using Go version 1.19. If
-not already installed, [the official Go site](https://go.dev/doc/install) contains instructions as to how to install it.
+# Nawi backend
+This repository contains the development of camera streamer backend which is the software project in charge of sending the live transmission of a TCP/IP camera, it has to be connected to nawi camera service with the correct IP of the container.
 
-The camera server also requires the GStreamer libraries to be available in the system. This can be installes following
-the instructions available [in their official wiki](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c).
+## Project setup
 
-## Fetch the sources
-You can fetch the latest development release by directly cloning the repository:
-```shell
-git clone https://github.com/SmartFactory-Tec/camera_server.git
-```
+1. Clone the project repository on your local machine.
 
-## Building and running the server
-First, enter the repository's folder and download all of the project's dependencies:
+   SSH:
 
-```shell
-cd security_backend
-go mod download
-```
-
-Next, to run the program run the following command:
-
-```shell
-go run security_backend/cmd/security_backend 
-```
-
-If you otherwise want to only build the server and get it's executable, use the following command (don't forget to give 
-the executable a name):
-
-```shell
-go build -o {EXECUTABLE NAME} security_backend/cmd/security_backend
-```
-
-## Configuring the server
-The server automatically generates a default configuration file in your distribution's default location. Normally,
-this is `~/.config/camera_server/config.toml`. This can be overriden by setting the `SERVER_CONFIG_PATH` environment 
-variable to any other folder.
-
-## Running in docker
-An image for running this server is available in the GitHub Container Registry. Pull it with the following command:
-
-```shell
-docker pull ghcr.io/smartfactory-tec/security_backend:latest
-```
-
-To configure the server inside the docker image, override the `/config` folder inside the image (with a volume or bind
-mount). 
-
-By default, the image exposes the 3000 port.
-
-
-
-docker build -t backend:nawi -f Dockerfile .
-docker run --rm -it -p 3002:3000/tcp backend:nawi
-
-
+   ```bash
+   $ git clone --recurse-submodules https://github.com/RoBorregos/Robocup-Home.git
+   ```
+2.  Build the image just the first time
+  ```bash
+   $ docker build -t backend:nawi -f Dockerfile .
+  ```
+3. Run the container containing the code 
+  ```bash
+   $ docker run --rm -it -p 3002:3000/tcp backend:nawi
+  ```
+6. Enter the container and inside security_backend/cmd/security_backend, run the following code.
+  ```bash
+   $ go run .
+  ```
+7. Consider that the port has to be 3002 and the camera_service has to be the IP con the container running camera_service
+  ```bash
+   $ port = 3002
+    [camera_service]
+    hostname = '172.17.0.5'
+    port = 3001
+  ```
+## Useful commands
+1. The camera link is generated in https://www.ispyconnect.com/camera/imou
+```bash
 rtsp://admin:L2FDAF98@192.168.1.73:554/cam/realmonitor?channel=1&subtype=0&unicast=true&proto=Onvif
+```

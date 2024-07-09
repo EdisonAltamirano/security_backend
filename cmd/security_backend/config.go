@@ -54,10 +54,10 @@ func loadConfig(logger *zap.SugaredLogger) Config {
 	configLoader.SetConfigType("toml")
 
 	// main config
-	configLoader.SetDefault("port", 3000)
+	configLoader.SetDefault("port", 3002)
 
 	// db config
-	configLoader.SetDefault("camera_service.hostname", "http://172.17.0.5")
+	configLoader.SetDefault("camera_service.hostname", "172.17.0.5")
 	//configLoader.SetDefault("camera_service.port", 3000)
 	configLoader.SetDefault("camera_service.port", 3001)
 
